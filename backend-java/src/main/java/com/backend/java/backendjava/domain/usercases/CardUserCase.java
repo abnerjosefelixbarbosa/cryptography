@@ -13,7 +13,6 @@ import java.util.List;
 public class CardUserCase implements CardAdapter {
     public Card createCard(Card card) {
         validateCard(card);
-
         return  null;
     }
 
