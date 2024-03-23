@@ -1,6 +1,6 @@
-package com.backend.java.backendjava.externalframework.repositories;
+package com.backend.java.backendjava.repositories;
 
-import com.backend.java.backendjava.externalframework.entities.Card;
+import com.backend.java.backendjava.entities.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

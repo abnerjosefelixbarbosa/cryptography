@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record CardRequest(
-        @NotNull
-        @NotBlank
+        @NotNull(message = "user document is null")
+        @NotBlank(message = "user document is blank")
         String userDocument,
-        @NotNull
-        @NotBlank
+        @NotNull(message = "credit card token is null")
+        @NotBlank(message = "credit card token is blank")
         String creditCardToken,
-        @NotNull
+        @NotNull(message = "card value is null")
         Long cardValue
 ) { }

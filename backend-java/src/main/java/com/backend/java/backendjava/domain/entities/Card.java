@@ -1,5 +1,6 @@
 package com.backend.java.backendjava.domain.entities;
 
+import com.backend.java.backendjava.requests.CardRequest;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,4 +14,10 @@ public class Card {
     private String userDocument;
     private Long value;
     private String creditCardToken;
+
+    public Card(CardRequest request) {
+        this.userDocument = request.userDocument();
+        this.value = request.cardValue();
+        this.creditCardToken = request.creditCardToken();
+    }
 }

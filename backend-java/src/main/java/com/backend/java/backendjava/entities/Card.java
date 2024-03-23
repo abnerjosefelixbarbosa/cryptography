@@ -1,5 +1,6 @@
-package com.backend.java.backendjava.externalframework.entities;
+package com.backend.java.backendjava.entities;
 
+import com.backend.java.backendjava.requests.CardRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,8 +23,13 @@ public class Card implements Serializable {
     @Column
     private Long cardValue;
 
+    public Card(CardRequest request) {
+        this.userDocument = request.userDocument();
+        this.creditCardToken = request.creditCardToken();
+        this.cardValue = request.cardValue();
+    }
+
     public void updateCard(Card card) {
-        id = card.getId();
         userDocument = card.getUserDocument();
         creditCardToken = card.getCreditCardToken();
         cardValue = card.getCardValue();
