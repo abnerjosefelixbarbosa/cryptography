@@ -1,7 +1,6 @@
-package com.backend.java.backendjava.responses;
+package com.backend.java.backendjava.dtos.responses;
 
-import com.backend.java.backendjava.entities.Card;
-import com.backend.java.backendjava.requests.CardRequest;
+import com.backend.java.backendjava.infra.entities.Card;
 
 public record CardResponse(
         Long id,

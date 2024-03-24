@@ -1,13 +1,13 @@
 package com.backend.java.backendjava.adapters;
 
-import com.backend.java.backendjava.domain.entities.Card;
+import com.backend.java.backendjava.entities.Card;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface CardAdapter {
     Card createCard(Card card);
-    List<Card> readCard();
-    Card readCardById(Long id);
+    Page<Card> readCard();
     Card updateCardById(Long id, Card card);
     void deleteCardById(Long id);
 }

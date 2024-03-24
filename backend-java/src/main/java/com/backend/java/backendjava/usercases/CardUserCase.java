@@ -1,11 +1,9 @@
-package com.backend.java.backendjava.domain.usercases;
+package com.backend.java.backendjava.usercases;
 
 import com.backend.java.backendjava.adapters.CardAdapter;
-import com.backend.java.backendjava.domain.entities.Card;
-import com.backend.java.backendjava.responses.CardResponse;
-import org.springframework.http.ResponseEntity;
+import com.backend.java.backendjava.entities.Card;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -16,11 +14,7 @@ public class CardUserCase implements CardAdapter {
         return  null;
     }
 
-    public List<Card> readCard() {
-        return null;
-    }
-
-    public Card readCardById(Long id) {
+    public Page<Card> readCard() {
         return null;
     }
 
@@ -29,8 +23,7 @@ public class CardUserCase implements CardAdapter {
         return null;
     }
 
-    public void deleteCardById(Long id) {
-    }
+    public void deleteCardById(Long id) {}
 
     private void  validateCard(Card card) {
         if (card.getValue() == 0) {

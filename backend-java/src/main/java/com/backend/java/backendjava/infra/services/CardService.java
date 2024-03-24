@@ -1,7 +1,8 @@
-package com.backend.java.backendjava.services;
+package com.backend.java.backendjava.infra.services;
 
-import com.backend.java.backendjava.entities.Card;
-import com.backend.java.backendjava.repositories.CardRepository;
+import com.backend.java.backendjava.adapters.CardAdapter;
+import com.backend.java.backendjava.infra.entities.Card;
+import com.backend.java.backendjava.infra.repositories.CardRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,17 +10,19 @@ import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 @Service
 public class CardService {
     private final CardRepository cardRepository;
+    private final CardAdapter cardAdapter;
 
-    public CardService(CardRepository cardRepository) {
+    public CardService(CardRepository cardRepository, CardAdapter cardAdapter) {
         this.cardRepository = cardRepository;
+        this.cardAdapter = cardAdapter;
     }
 
     public Card createCard(Card card) {
+        cardAdapter.createCard(new com.backend.java.backendjava.entities.Card(card));
         var save = cardRepository.save(card);
         save.setCreditCardToken(crypt(save.getCreditCardToken()));
         save.setUserDocument(crypt(save.getUserDocument()));
@@ -36,29 +39,24 @@ public class CardService {
         return findAll;
     }
 
-    public Card readCardById(Long id) {
-        var findById = cardRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("id not found"));
-        findById.setCreditCardToken(crypt(findById.getCreditCardToken()));
-        findById.setUserDocument(crypt(findById.getUserDocument()));
-        return findById;
-    }
-
     public Card updateCardById(Long id, Card card) {
-        var readCardById = readCardById(id);
-        readCardById.updateCard(card);
-        var save = cardRepository.save(readCardById);
+        cardAdapter.updateCardById(id, new com.backend.java.backendjava.entities.Card(card));
+        var findById = findById(id);
+        findById.updateCard(card);
+        var save = cardRepository.save(findById);
         save.setCreditCardToken(crypt(save.getCreditCardToken()));
         save.setUserDocument(crypt(save.getUserDocument()));
         return save;
     }
 
     public void deleteCardById(Long id) {
-        readCardById(id);
+        findById(id);
         cardRepository.deleteById(id);
     }
 
-    public void deleteCard() {
-        cardRepository.deleteAll();
+    private Card findById(Long id) {
+        var findById = cardRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("id not found"));
+        return  findById;
     }
 
     private String crypt(String value) {

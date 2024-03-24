@@ -1,37 +1,27 @@
 package com.backend.java.backendjava.entities;
 
-import com.backend.java.backendjava.requests.CardRequest;
-import jakarta.persistence.*;
+import com.backend.java.backendjava.dtos.requests.CardRequest;
 import lombok.*;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "card_tb")
-public class Card implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Card {
     private Long id;
-    @Column
     private String userDocument;
-    @Column
+    private Long value;
     private String creditCardToken;
-    @Column
-    private Long cardValue;
 
     public Card(CardRequest request) {
         this.userDocument = request.userDocument();
+        this.value = request.cardValue();
         this.creditCardToken = request.creditCardToken();
-        this.cardValue = request.cardValue();
     }
 
-    public void updateCard(Card card) {
-        userDocument = card.getUserDocument();
-        creditCardToken = card.getCreditCardToken();
-        cardValue = card.getCardValue();
+    public Card(com.backend.java.backendjava.infra.entities.Card card) {
+        this.userDocument = card.getUserDocument();
+        this.value = card.getCardValue();
+        this.creditCardToken = card.getCreditCardToken();
     }
 }

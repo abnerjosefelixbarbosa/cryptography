@@ -1,4 +1,4 @@
-package com.backend.java.backendjava.requests;
+package com.backend.java.backendjava.dtos.requests;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
