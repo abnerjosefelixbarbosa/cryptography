@@ -30,6 +30,12 @@ public class CardController {
         return ResponseEntity.status(200).body(responses);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CardResponse> readCardById(Long id) {
+        var response = cardService.readCardById(id);
+        return ResponseEntity.status(200).body(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<CardResponse> updateCardById(@PathVariable Long id, @RequestBody @Valid CardRequest request) {
         var response = cardService.updateCardById(id, request);

@@ -48,6 +48,11 @@ public class CardService {
         return cardRepository.findAll(pageable).map(CardResponse::new);
     }
 
+    public CardResponse readCardById(Long id) {
+        var card = findById(id);
+        return new CardResponse(card);
+    }
+
     public CardResponse updateCardById(Long id, CardRequest request) {
         cardAdapter.updateCardById(id, request);
         var findById = findById(id);
