@@ -18,10 +18,4 @@ public class Card {
         this.value = request.cardValue();
         this.creditCardToken = request.creditCardToken();
     }
-
-    public Card(com.backend.java.backendjava.infra.entities.Card card) {
-        this.userDocument = card.getUserDocument();
-        this.value = card.getCardValue();
-        this.creditCardToken = card.getCreditCardToken();
-    }
 }
