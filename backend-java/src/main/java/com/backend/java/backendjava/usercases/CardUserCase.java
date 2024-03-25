@@ -29,7 +29,7 @@ public class CardUserCase implements CardAdapter {
 
     private void  validateCard(CardRequest request) {
         if (request.cardValue() == 0) {
-            throw  new RuntimeException("value card is 0");
+            throw  new RuntimeException("value card 0");
         }
     }
 }

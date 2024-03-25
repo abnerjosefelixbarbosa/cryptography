@@ -4,14 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
 
 public record CardRequest(
-        @NotNull(message = "user document is null")
-        @NotBlank(message = "user document is blank")
+        @NotNull(message = "user document null")
+        @NotBlank(message = "user document blank")
         String userDocument,
-        @NotNull(message = "credit card token is null")
-        @NotBlank(message = "credit card token is blank")
+        @NotNull(message = "credit card token null")
+        @NotBlank(message = "credit card token blank")
         String creditCardToken,
-        @NotNull(message = "card value is null")
+        @NotNull(message = "card value null")
         Long cardValue
 ) { }
