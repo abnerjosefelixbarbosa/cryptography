@@ -28,7 +28,7 @@ public class CardUserCase implements CardAdapter {
     public void deleteCardById(Long id) {}
 
     private void  validateCard(CardRequest request) {
-        if (request.cardValue() == 0) {
+        if (request.getCardValue() == 0) {
             throw  new RuntimeException("value card 0");
         }
     }

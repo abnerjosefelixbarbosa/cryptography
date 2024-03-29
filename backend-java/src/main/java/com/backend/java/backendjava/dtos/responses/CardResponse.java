@@ -1,15 +1,21 @@
 package com.backend.java.backendjava.dtos.responses;
 
 import com.backend.java.backendjava.infra.entities.Card;
+import lombok.Getter;
+import lombok.Setter;
 
-public record CardResponse(
-        Long id,
-        String userDocument,
-        String creditCardToken,
-        Long cardValue
-) {
+@Getter
+@Setter
+public class CardResponse {
+    private Long id;
+    private String userDocument;
+    private String creditCardToken;
+    private Long cardValue;
+
     public CardResponse(Card card) {
-        this(card.getId(), card.getUserDocument(), card.getCreditCardToken(),
-                card.getCardValue());
+        this.id = card.getId();
+        this.userDocument = card.getUserDocument();
+        this.creditCardToken = card.getCreditCardToken();
+        this.cardValue = card.getCardValue();
     }
 }

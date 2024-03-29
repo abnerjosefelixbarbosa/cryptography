@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Stream;
+
 @Service
 public class CardService {
     @Autowired
@@ -23,21 +25,21 @@ public class CardService {
 
     public CardResponse createCard(CardRequest request) {
         cardAdapter.createCard(request);
-        var userDocument = encoder().encode(request.userDocument());
-        var creditCardToken = encoder().encode(request.creditCardToken());
-        var stream = cardRepository.findAll().parallelStream();
+        String userDocument = encoder().encode(request.getUserDocument());
+        String creditCardToken = encoder().encode(request.getCreditCardToken());
+        Stream<Card> stream = cardRepository.findAll().parallelStream();
 
         stream.anyMatch((val) -> {
-            if (encoder().matches(request.userDocument(), val.getUserDocument())) {
+            if (encoder().matches(request.getUserDocument(), val.getUserDocument())) {
                 throw new RuntimeException("user document exists");
             }
-            if (encoder().matches(request.creditCardToken(), val.getCreditCardToken())) {
+            if (encoder().matches(request.getCreditCardToken(), val.getCreditCardToken())) {
                 throw new RuntimeException("credit card token exists");
             }
             return false;
         });
 
-        var card = new Card(request);
+        Card card = new Card(request);
         card.setUserDocument(userDocument);
         card.setCreditCardToken(creditCardToken);
         card = cardRepository.save(card);
@@ -49,33 +51,32 @@ public class CardService {
     }
 
     public CardResponse readCardById(Long id) {
-        var card = findById(id);
+        Card card = findById(id);
         return new CardResponse(card);
     }
 
     public CardResponse updateCardById(Long id, CardRequest request) {
         cardAdapter.updateCardById(id, request);
-        var findById = findById(id);
-        var userDocument = encoder().encode(request.userDocument());
-        var creditCardToken = encoder().encode(request.creditCardToken());
-        var stream = cardRepository.findAll().parallelStream();
+        Card findById = findById(id);
+        String userDocument = encoder().encode(request.getUserDocument());
+        String creditCardToken = encoder().encode(request.getCreditCardToken());
+        Stream<Card> stream = cardRepository.findAll().parallelStream();
 
         stream.anyMatch((val) -> {
-            if (encoder().matches(request.userDocument(), val.getUserDocument())) {
+            if (encoder().matches(request.getUserDocument(), val.getUserDocument())) {
                 throw new RuntimeException("user document exists");
             }
-            if (encoder().matches(request.creditCardToken(), val.getCreditCardToken())) {
+            if (encoder().matches(request.getCreditCardToken(), val.getCreditCardToken())) {
                 throw new RuntimeException("credit card token exists");
             }
             return false;
         });
 
-        var card = new Card(request);
+        Card card = new Card(request);
         findById.updateCard(card);
         findById.setUserDocument(userDocument);
         findById.setCreditCardToken(creditCardToken);
         card = cardRepository.save(findById);
-
         return new CardResponse(card);
     }
 

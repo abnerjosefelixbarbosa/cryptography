@@ -24,9 +24,9 @@ public class Card implements Serializable {
     private Long cardValue;
 
     public Card(CardRequest request) {
-        this.userDocument = request.userDocument();
-        this.creditCardToken = request.creditCardToken();
-        this.cardValue = request.cardValue();
+        this.userDocument = request.getUserDocument();
+        this.creditCardToken = request.getCreditCardToken();
+        this.cardValue = request.getCardValue();
     }
 
     public void updateCard(Card card) {

@@ -14,8 +14,8 @@ public class Card {
     private String creditCardToken;
 
     public Card(CardRequest request) {
-        this.userDocument = request.userDocument();
-        this.value = request.cardValue();
-        this.creditCardToken = request.creditCardToken();
+        this.userDocument = request.getUserDocument();
+        this.value = request.getCardValue();
+        this.creditCardToken = request.getCreditCardToken();
     }
 }

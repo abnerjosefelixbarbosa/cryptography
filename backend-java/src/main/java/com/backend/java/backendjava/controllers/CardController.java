@@ -20,25 +20,25 @@ public class CardController {
 
     @PostMapping
     public ResponseEntity<CardResponse> createCard(@RequestBody @Valid CardRequest request) {
-        var response = cardService.createCard(request);
+        CardResponse response = cardService.createCard(request);
         return ResponseEntity.status(201).body(response);
     }
 
     @GetMapping
     public ResponseEntity<Page<CardResponse>> readCard(Pageable pageable) {
-        var responses = cardService.readCard(pageable);
+        Page<CardResponse> responses = cardService.readCard(pageable);
         return ResponseEntity.status(200).body(responses);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CardResponse> readCardById(Long id) {
-        var response = cardService.readCardById(id);
+        CardResponse response = cardService.readCardById(id);
         return ResponseEntity.status(200).body(response);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CardResponse> updateCardById(@PathVariable Long id, @RequestBody @Valid CardRequest request) {
-        var response = cardService.updateCardById(id, request);
+        CardResponse response = cardService.updateCardById(id, request);
         return ResponseEntity.status(200).body(response);
     }
 
