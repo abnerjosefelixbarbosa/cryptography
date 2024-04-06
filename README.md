@@ -29,7 +29,7 @@
 
 ```bash
 # clone repository
-git clone https://github.com/abnerjosefelixbarbosa/api-controle-de-estoque.git
+git clone https://github.com/abnerjosefelixbarbosa/cryptography.git
 ```
 
 # Author
